@@ -39,16 +39,6 @@ define( [ "core/media", "core/track", "core/trackevent", "util/sanitizer" ],
       });
     }
 
-    // Popcorn is ready to do things (this happens on page load) so send a
-    // "hello" to everyone so that we can sync up with them.
-    butter.listen( "ready", function() {
-      if ( TogetherJS.running ) {
-        TogetherJS.send({
-          type: "hello"
-        });
-      }
-    });
-
     [ "trackadded",
       "trackremoved",
       "trackeventadded",
@@ -61,7 +51,7 @@ define( [ "core/media", "core/track", "core/trackevent", "util/sanitizer" ],
 
     // Someone has joined the TogetherJS session so let's send our project state
     // so that they can sync up with us.
-    TogetherJS.hub.on( "hello", function() {
+    TogetherJS.hub.on( "togetherjs.hello", function() {
       TogetherJS.send({
         type: "ahoy",
         data: butter.project.export()

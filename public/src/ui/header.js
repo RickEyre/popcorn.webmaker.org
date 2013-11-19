@@ -63,6 +63,9 @@ define([ "WebmakerUI", "localized", "dialog/dialog", "util/lang", "l10n!/layouts
       };
 
       TogetherJS.config( "disableWebRTC", true );
+      TogetherJS.config( "callToStart", function( onStart ) {
+        butter.listen( "ready", onStart );
+      });
 
       TogetherJS.on( "ready", toggleTogether( true ) );
       TogetherJS.on( "close", toggleTogether( false ) );
